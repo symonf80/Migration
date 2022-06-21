@@ -27,17 +27,19 @@ public class PostRepository {
         return Optional.ofNullable(allPosts.get(id));
     }
 
-    public Post save(Post savePost) {
+    public Post save(Post savePost) {        
         if (savePost.getId() == 0) {
             long id = idCounter.incrementAndGet();
+            while(allPosts.containsKey(id))
+                id=idCounter.incrementAndGet();
             savePost.setId(id);
             allPosts.put(id, savePost);
-        } else if (allPosts.containsKey(savePost.getId())) {
-            allPosts.replace(savePost.getId(), savePost);
-        } else {
-            throw new NotFoundException();
+        } else if (savePost.getId() !=0) {
+            Long currentId=savePost.getId();
+            allPosts.put(currentId,savePost);
         }
         return savePost;
+    
     }
 
     public void removeById(long id) {
