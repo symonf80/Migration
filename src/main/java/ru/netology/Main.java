@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class Main {
-    public static final int PORT = 9999;
+    public static final int PORT = 8080;
 
     public static void main(String[] args) throws LifecycleException, IOException {
         final var tomcat = new Tomcat();
